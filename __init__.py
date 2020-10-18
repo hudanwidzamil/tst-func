@@ -6,6 +6,18 @@ from azure.cosmos import exceptions, CosmosClient, PartitionKey
 endpoint = "https://tst-azure.documents.azure.com:443/"
 key = '89lhKSndZ8tsZx4X9g8xrKez2IbMH0lJliJEdNnP1PdXSAGin42M952uBkCUbyFX1HmhDUt71gKYZSaygEL3tA=='
 
+client = CosmosClient(endpoint, key)
+    
+database_name = 'demodb'
+database = client.create_database_if_not_exists(id=database_name)
+
+container_name = 'items'
+container = database.create_container_if_not_exists(
+    id=container_name, 
+    partition_key=PartitionKey(path="/name"),
+    offer_throughput=400
+)
+
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
@@ -26,20 +38,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
              status_code=200
         )
 
-    client = CosmosClient(endpoint, key)
     
-    database_name = 'demodb'
-    database = client.create_database_if_not_exists(id=database_name)
-
-    container_name = 'items'
-    container = database.create_container_if_not_exists(
-        id=container_name, 
-        partition_key=PartitionKey(path="/name"),
-        offer_throughput=400
-    )
     db_insert = {
         "name"= name,
-        "insert_time" = datetime.datetime.now()s
+        "insert_time" = datetime.datetime.now()
     }
     container.create_item(body=db_insert)
 
