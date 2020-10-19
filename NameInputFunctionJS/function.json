@@ -1,0 +1,30 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "out",
+      "name": "outputDocument",
+      "databaseName": "demodb",
+      "collectionName": "items",
+      "createIfNotExists": "true",
+      "connectionStringSetting": "tstazure_DOCUMENTDB",
+      "partitionKey": "/name",
+      "collectionThroughput": "400"
+    }
+  ]
+}

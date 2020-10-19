@@ -1,0 +1,8 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "tstazure_DOCUMENTDB": "AccountEndpoint=https://tst-azure.documents.azure.com:443/;AccountKey=89lhKSndZ8tsZx4X9g8xrKez2IbMH0lJliJEdNnP1PdXSAGin42M952uBkCUbyFX1HmhDUt71gKYZSaygEL3tA==;"
+  }
+}
